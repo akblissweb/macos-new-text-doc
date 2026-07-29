@@ -1,6 +1,6 @@
 {
   "name": "new-text-file-for-finder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Finder extension adding a New Text File contextual-menu command",
   "homepage": "https://cutecat.dev",
@@ -12,8 +12,11 @@
   "license": "MIT",
   "scripts": {
     "build": "./Scripts/build-package.sh",
+    "bump-version": "./Scripts/bump-version.sh",
     "deploy": "node Scripts/deploy-release.js",
-    "upload": "node Scripts/deploy-release.js --upload-existing"
+    "upload": "node Scripts/deploy-release.js --upload-existing",
+    "release": "node Scripts/deploy-release.js --no-upload && node Scripts/publish-github-release.js && node Scripts/deploy-release.js --upload-existing",
+    "release:github": "node Scripts/publish-github-release.js"
   },
   "dependencies": {
     "basic-ftp": "^5.0.5"

@@ -26,20 +26,10 @@ final class FinderSync: FIFinderSync {
         let controller = FIFinderSyncController.default()
         let selectedURLs = controller.selectedItemURLs() ?? []
 
-        let directoryURL: URL
-        if let selectedURL = selectedURLs.first {
-            directoryURL = selectedURL.deletingLastPathComponent()
-        } else if let targetedURL = controller.targetedURL() {
-            var isDirectory: ObjCBool = false
-            if FileManager.default.fileExists(
-                atPath: targetedURL.path,
-                isDirectory: &isDirectory
-            ), isDirectory.boolValue {
-                directoryURL = targetedURL
-            } else {
-                directoryURL = targetedURL.deletingLastPathComponent()
-            }
-        } else {
+        guard let directoryURL = destinationDirectory(
+            targetedURL: controller.targetedURL(),
+            selectedURLs: selectedURLs
+        ) else {
             NSSound.beep()
             return
         }
@@ -65,5 +55,27 @@ final class FinderSync: FIFinderSync {
         }
 
         NSWorkspace.shared.activateFileViewerSelecting([candidateURL])
+    }
+
+    private func destinationDirectory(
+        targetedURL: URL?,
+        selectedURLs: [URL]
+    ) -> URL? {
+        // Finder supplies the displayed folder as targetedURL when its empty
+        // background is clicked. If an item is targeted instead, create the
+        // new document inside that folder or beside that file.
+        guard let target = targetedURL ?? selectedURLs.first else {
+            return nil
+        }
+
+        var isDirectory: ObjCBool = false
+        if FileManager.default.fileExists(
+            atPath: target.path,
+            isDirectory: &isDirectory
+        ), isDirectory.boolValue {
+            return target
+        }
+
+        return target.deletingLastPathComponent()
     }
 }

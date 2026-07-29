@@ -10,6 +10,7 @@
 		A10000000000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* AppDelegate.swift */; };
 		A10000000000000000000002 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* FinderSync.swift */; };
 		A10000000000000000000003 /* NewTextFileFinderSync.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* NewTextFileFinderSync.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A10000000000000000000004 /* NewTextFile.icns in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* NewTextFile.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		A20000000000000000000002 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		A20000000000000000000003 /* New Text File.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Text File.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20000000000000000000004 /* NewTextFileFinderSync.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NewTextFileFinderSync.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000000000000000000005 /* NewTextFile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Resources/NewTextFile.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +62,10 @@
 		};
 		A80000000000000000000002 /* NewTextFileApp */ = {
 			isa = PBXGroup;
-			children = (A20000000000000000000001 /* AppDelegate.swift */, );
+			children = (
+				A20000000000000000000001 /* AppDelegate.swift */,
+				A20000000000000000000005 /* NewTextFile.icns */,
+			);
 			path = NewTextFileApp;
 			sourceTree = "<group>";
 		};
@@ -144,7 +149,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AB0000000000000000000001 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		AB0000000000000000000001 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A10000000000000000000004 /* NewTextFile.icns in Resources */, ); runOnlyForDeploymentPostprocessing = 0; };
 		AB0000000000000000000002 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 

@@ -1,0 +1,22 @@
+#!/bin/zsh
+set -u
+
+# Finder Sync must be enabled by the user. Open Apple's extension-management
+# interface in the active GUI session without showing a separate setup window.
+if [[ "${3:-/}" != "/" ]]; then
+    exit 0
+fi
+
+console_user=$(/usr/bin/stat -f '%Su' /dev/console)
+if [[ -z "$console_user" || "$console_user" == "root" || "$console_user" == "loginwindow" ]]; then
+    exit 0
+fi
+
+console_uid=$(/usr/bin/id -u "$console_user")
+app_path="/Applications/New Text File.app"
+
+/bin/launchctl asuser "$console_uid" \
+    /usr/bin/sudo -u "$console_user" \
+    /usr/bin/open "$app_path"
+
+exit 0

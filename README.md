@@ -22,7 +22,7 @@ empty plain-text document in that folder.
 - Automatically uses `New Text File 2.txt`, `New Text File 3.txt`, and so on.
 - Selects the new document in Finder after creating it.
 - Works in normal Finder folders, on the Desktop, and on mounted drives.
-- Includes a setup app that checks whether the Finder extension is enabled.
+- Opens Apple’s Finder Extensions settings automatically after installation.
 - Does not install a daemon, login item, browser extension, or background app.
 - Does not collect analytics or transmit file information.
 
@@ -43,14 +43,12 @@ are not required.
 ## Installation
 
 1. Download the latest `new-text-file-x.y.z-release.pkg` from
-   [GitHub Releases](https://github.com/akblissweb/macos-new-text-doc/releases)
-   or the [Cute Cat Studios release server](https://area90.com/releases/new-text-file/).
+   [GitHub Releases](https://github.com/akblissweb/macos-new-text-doc/releases).
+   The [Cute Cat Studios release server](https://area90.com/releases/new-text-file/)
+   is available as a mirror.
 2. Open the package and complete the macOS Installer.
-3. Open **New Text File** from `/Applications`.
-4. If the setup window says the extension is disabled, click
-   **Enable Finder Extension…**.
-5. Enable **New Text File** in the Finder Extensions section of System Settings.
-6. Return to the setup app and click **Check Again**.
+3. System Settings opens automatically to the Finder Extensions section.
+4. Enable **New Text File**.
 
 macOS requires Finder extensions to be approved per user. This one-time step
 cannot be silently bypassed by an installer.
@@ -85,8 +83,7 @@ cleanup is needed.
 The installed software performs one local operation: creating an empty file in
 the Finder folder where the command was invoked. It does not read document
 contents, track usage, contact a server, or run continuously outside Finder’s
-extension host. The optional Cute Cat Studios link in the setup window opens
-`https://cutecat.dev` only when clicked.
+extension host.
 
 Public releases are:
 
@@ -101,9 +98,8 @@ Public releases are:
 
 ### The command does not appear
 
-Open **New Text File** from the Applications folder and check the status shown
-in the setup window. If necessary, click **Enable Finder Extension…**, enable
-**New Text File** in System Settings, and then click **Check Again**.
+Open **New Text File** from the Applications folder to reopen Apple’s Finder
+Extensions settings, then enable **New Text File**.
 
 If it is already enabled, turn the extension off and on again. Relaunching
 Finder or logging out and back in can also refresh Finder’s extension list.

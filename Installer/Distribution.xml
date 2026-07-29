@@ -3,8 +3,11 @@
     <title>New Text File for Finder</title>
     <organization>com.cutecatstudios.newtextfile</organization>
     <domains enable_localSystem="true"/>
-    <options customize="never" require-scripts="false" rootVolumeOnly="true"/>
-    <background file="CuteCatStudiosInstallerLogo.png"
+    <options customize="never"
+             require-scripts="false"
+             rootVolumeOnly="true"
+             hostArchitectures="arm64,x86_64"/>
+    <background file="CuteCatStudiosInstallerBackground.png"
                 alignment="bottomleft"
                 scaling="none"
                 mime-type="image/png"/>

@@ -91,7 +91,29 @@ Real credentials belong only in `.env`. It is excluded from Git.
 
 ### Commands
 
-Build, verify, and upload:
+Before starting a release, bump all version metadata together:
+
+```sh
+npm run bump-version -- patch
+```
+
+Use `minor` or `major` in place of `patch` when appropriate. Review, commit,
+and push the version change before publishing.
+
+Build, notarize, verify, and publish the package to both GitHub Releases and
+the area90 mirror:
+
+```sh
+npm run release
+```
+
+The command builds only once. It creates or updates `vX.Y.Z`, uploads the
+universal package and its SHA-256 checksum, marks it as the latest GitHub
+release, and uploads the same verified package to area90. Signing and
+notarization stay local, so the Developer ID private keys do not need to be
+stored in GitHub Actions.
+
+Build, verify, and upload an optional mirror to area90:
 
 ```sh
 npm run deploy
@@ -103,13 +125,13 @@ Build and verify without uploading:
 npm run deploy -- --no-upload
 ```
 
-Verify and upload the already-built current version:
+Verify and upload the already-built current version to area90:
 
 ```sh
 npm run upload
 ```
 
-The default public release directory is:
+The optional mirror directory is:
 
 ```text
 https://area90.com/releases/new-text-file/
@@ -126,7 +148,7 @@ https://area90.com/releases/new-text-file/latest-release.php?action=redirect
 ```text
 Installer/     Installer distribution definition, branded pages, and artwork
 Scripts/       Local build, release deployment, and latest-release endpoint
-Source/        Xcode project, setup application, and Finder Sync extension
+Source/        Xcode project, settings launcher, and Finder Sync extension
 docs/          Maintainer documentation
 VERSION        Canonical semantic release version
 ```

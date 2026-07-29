@@ -6,3 +6,4 @@ node_modules/
 xcuserdata/
 *.xcuserstate
 .DS_Store
+/New Text File*.txt

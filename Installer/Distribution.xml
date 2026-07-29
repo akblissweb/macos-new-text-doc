@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>New Text File for Finder</title>
+    <organization>com.cutecatstudios.newtextfile</organization>
+    <domains enable_localSystem="true"/>
+    <options customize="never" require-scripts="false" rootVolumeOnly="true"/>
+    <background file="CuteCatStudiosInstallerLogo.png"
+                alignment="bottomleft"
+                scaling="none"
+                mime-type="image/png"/>
+    <volume-check>
+        <allowed-os-versions>
+            <os-version min="13.0"/>
+        </allowed-os-versions>
+    </volume-check>
+    <welcome file="Welcome.html"/>
+    <readme file="ReadMe.html"/>
+    <conclusion file="Conclusion.html"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.cutecatstudios.newtextfile.pkg"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.cutecatstudios.newtextfile.pkg" visible="false">
+        <pkg-ref id="com.cutecatstudios.newtextfile.pkg"/>
+    </choice>
+    <pkg-ref id="com.cutecatstudios.newtextfile.pkg">
+        <must-close>
+            <app id="com.cutecatstudios.newtextfile"/>
+        </must-close>
+    </pkg-ref>
+    <pkg-ref id="com.cutecatstudios.newtextfile.pkg" version="__VERSION__">
+        NewTextFile-component.pkg
+    </pkg-ref>
+</installer-gui-script>

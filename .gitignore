@@ -1,0 +1,8 @@
+.build/
+Builds/*.pkg
+releases/
+.env
+node_modules/
+xcuserdata/
+*.xcuserstate
+.DS_Store

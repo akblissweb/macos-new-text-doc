@@ -15,8 +15,6 @@ generated_distribution="$build_dir/Distribution.xml"
 package_root="$build_dir/package-root"
 component_plist="$project_root/Installer/Components.plist"
 installer_scripts="$project_root/Installer/Scripts"
-installer_resources="$project_root/Installer/Resources"
-generated_resources="$build_dir/installer-resources"
 
 if [[ ! "$version" =~ '^[0-9]+\.[0-9]+\.[0-9]+$' ]]; then
     print -u2 "VERSION must contain an x.y.z semantic version; got: $version"
@@ -30,19 +28,10 @@ fi
 if [[ -d "$package_root" ]]; then
     find "$package_root" -mindepth 1 -delete
 fi
-if [[ -d "$generated_resources" ]]; then
-    find "$generated_resources" -mindepth 1 -delete
-fi
 mkdir -p "$package_root/Applications"
-mkdir -p "$generated_resources"
 sed "s/__VERSION__/$version/g" \
     "$project_root/Installer/Distribution.xml" \
     > "$generated_distribution"
-ditto "$installer_resources" "$generated_resources"
-icon_base64=$(base64 < "$installer_resources/NewTextFileIcon.png" | tr -d '\n')
-sed "s|__NEW_TEXT_FILE_ICON__|data:image/png;base64,$icon_base64|" \
-    "$installer_resources/Welcome.html" \
-    > "$generated_resources/Welcome.html"
 
 app_identity=${APP_SIGN_IDENTITY:-}
 installer_identity=${INSTALLER_SIGN_IDENTITY:-}
@@ -121,7 +110,7 @@ pkgbuild \
 
 productbuild \
     --distribution "$generated_distribution" \
-    --resources "$generated_resources" \
+    --resources "$project_root/Installer/Resources" \
     --package-path "$build_dir/packages" \
     "$unsigned_product"
 

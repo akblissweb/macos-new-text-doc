@@ -91,6 +91,12 @@ function writeChecksum(file) {
   return checksum;
 }
 
+function writeLatestAlias(file) {
+  const latest = path.join(path.dirname(file), 'new-text-file-latest.pkg');
+  fs.copyFileSync(file, latest);
+  return latest;
+}
+
 function main() {
   const releaseVersion = version();
   const tag = `v${releaseVersion}`;
@@ -113,9 +119,10 @@ function main() {
   const head = ensureReleaseSourceIsPublished();
   run('gh', ['auth', 'status']);
   const checksum = writeChecksum(artifact);
+  const latest = writeLatestAlias(artifact);
 
   if (status('gh', ['release', 'view', tag]) === 0) {
-    run('gh', ['release', 'upload', tag, artifact, checksum, '--clobber']);
+    run('gh', ['release', 'upload', tag, artifact, latest, checksum, '--clobber']);
     run('gh', ['release', 'edit', tag, '--title', `New Text File ${releaseVersion}`, '--latest']);
   } else {
     run('gh', [
@@ -123,6 +130,7 @@ function main() {
       'create',
       tag,
       artifact,
+      latest,
       checksum,
       '--target',
       head,

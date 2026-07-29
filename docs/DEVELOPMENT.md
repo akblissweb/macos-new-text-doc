@@ -108,10 +108,10 @@ npm run release
 ```
 
 The command builds only once. It creates or updates `vX.Y.Z`, uploads the
-universal package and its SHA-256 checksum, marks it as the latest GitHub
-release, and uploads the same verified package to area90. Signing and
-notarization stay local, so the Developer ID private keys do not need to be
-stored in GitHub Actions.
+versioned universal package, a stable `new-text-file-latest.pkg` alias, and its
+SHA-256 checksum, marks it as the latest GitHub release, and uploads the same
+verified versioned package to area90. Signing and notarization stay local, so
+the Developer ID private keys do not need to be stored in GitHub Actions.
 
 Build, verify, and upload an optional mirror to area90:
 

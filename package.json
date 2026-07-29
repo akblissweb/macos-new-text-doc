@@ -1,6 +1,6 @@
 {
   "name": "new-text-file-for-finder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Finder extension adding a New Text File contextual-menu command",
   "homepage": "https://cutecat.dev",

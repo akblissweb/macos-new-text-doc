@@ -7,7 +7,7 @@
              require-scripts="false"
              rootVolumeOnly="true"
              hostArchitectures="arm64,x86_64"/>
-    <background file="CuteCatStudiosInstallerBackground.png"
+    <background file="NewTextFileInstallerSidebar.png"
                 alignment="bottomleft"
                 scaling="none"
                 mime-type="image/png"/>

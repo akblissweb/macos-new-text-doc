@@ -94,121 +94,39 @@ Public releases are:
   certificates.
 - Built with the hardened runtime.
 - Submitted to Apple’s notarization service.
-- Stapled with the resulting notarization ticket.
-- Verified with `codesign`, `pkgutil`, `stapler`, and Gatekeeper’s `spctl`.
+- Stapled with Apple’s notarization ticket.
+- Checked for acceptance by macOS Gatekeeper.
 
-## Building from source
+## Troubleshooting
 
-Requirements:
+### The command does not appear
 
-- macOS 13 or later
-- Xcode with the macOS SDK
-- Node.js and npm only when using the FTPS deployment workflow
+Open **New Text File** from the Applications folder and check the status shown
+in the setup window. If necessary, click **Enable Finder Extension…**, enable
+**New Text File** in System Settings, and then click **Check Again**.
 
-Create an unsigned local test installer:
+If it is already enabled, turn the extension off and on again. Relaunching
+Finder or logging out and back in can also refresh Finder’s extension list.
 
-```sh
-git clone https://github.com/akblissweb/macos-new-text-doc.git
-cd macos-new-text-doc
-./Scripts/build-package.sh
-```
+### The command is unavailable in a folder
 
-The semantic release version comes from [`VERSION`](VERSION). The output is:
+Make sure you right-click an empty area inside the folder, rather than an
+existing file. The destination must also allow your macOS account to create
+files.
 
-```text
-Builds/New Text File Installer x.y.z.pkg
-```
+### macOS blocks the installer
 
-Without Developer ID identities, the build script intentionally produces an
-ad-hoc-signed application and unsigned package suitable for local testing.
+Download the installer from the official links above. Public releases are
+Developer ID signed and notarized by Apple. If macOS still reports a problem,
+please contact Cute Cat Studios rather than bypassing its security warning.
 
-### Signed and notarized build
+## Support
 
-Run the build while logged into the macOS account whose keychain contains:
+For product information and support, visit
+[Cute Cat Studios](https://cutecat.dev).
 
-- `Developer ID Application`
-- `Developer ID Installer`
-- A stored `notarytool` credentials profile
-
-```sh
-NOTARY_PROFILE="your-notary-profile" ./Scripts/build-package.sh
-```
-
-The identities are discovered automatically. They may also be selected
-explicitly:
-
-```sh
-APP_SIGN_IDENTITY="Developer ID Application: Cute Cat Studios (TEAMID)" \
-INSTALLER_SIGN_IDENTITY="Developer ID Installer: Cute Cat Studios (TEAMID)" \
-NOTARY_PROFILE="your-notary-profile" \
-./Scripts/build-package.sh
-```
-
-## Release deployment
-
-The release workflow mirrors the CatnipTV deploy process. It:
-
-1. Requires the configured macOS release account (`cutecat` by default).
-2. Builds fresh universal `arm64` and `x86_64` binaries.
-3. Developer ID–signs the app, extension, and Installer package.
-4. Submits the package for Apple notarization and waits for acceptance.
-5. Staples and validates the notarization ticket.
-6. Verifies the app signature, hardened runtime, package signature, both
-   architectures, and Gatekeeper acceptance.
-7. Names the release `new-text-file-x.y.z-release.pkg`.
-8. Uploads it to Area90 over FTPS.
-9. Verifies the uploaded byte count.
-10. Uploads `latest-release.php`, which redirects to the highest semantic
-    version.
-
-Set up the deployer:
-
-```sh
-cp .env.example .env
-# Add the notary profile and Area90 FTPS credentials to .env.
-npm install
-```
-
-Build, verify, and upload:
-
-```sh
-npm run deploy
-```
-
-Build and verify without uploading:
-
-```sh
-npm run deploy -- --no-upload
-```
-
-Verify and upload the already-built current version:
-
-```sh
-npm run upload
-```
-
-The default public release location is:
-
-```text
-https://area90.com/releases/new-text-file/
-```
-
-The stable latest-release redirect is:
-
-```text
-https://area90.com/releases/new-text-file/latest-release.php?action=redirect
-```
-
-Real credentials belong only in `.env`, which is excluded from Git.
-
-## Repository layout
-
-```text
-Installer/     Installer distribution definition, branded pages, and artwork
-Scripts/       Local build, release deployment, and latest-release endpoint
-Source/        Xcode project, setup application, and Finder Sync extension
-VERSION        Canonical semantic release version
-```
+Developers who want to build the project or maintain a release can read the
+[development and deployment guide](docs/DEVELOPMENT.md).
 
 ## License
 

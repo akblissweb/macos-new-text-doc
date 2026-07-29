@@ -14,11 +14,18 @@ final class FinderSync: FIFinderSync {
 
     override func menu(for menuKind: FIMenuKind) -> NSMenu {
         let menu = NSMenu(title: "")
-        menu.addItem(
-            withTitle: "New Text File",
+        let item = NSMenuItem(
+            title: "New Text File",
             action: #selector(createTextFile(_:)),
             keyEquivalent: ""
         )
+        item.image = NSImage(
+            systemSymbolName: "doc.badge.plus",
+            accessibilityDescription: "New Text File"
+        )?.withSymbolConfiguration(
+            NSImage.SymbolConfiguration(pointSize: 14, weight: .regular)
+        )
+        menu.addItem(item)
         return menu
     }
 
